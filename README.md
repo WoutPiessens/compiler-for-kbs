@@ -13,6 +13,8 @@ In order to reproduce the experiments in chapter 5 of the thesis text, here is s
 o	Add the function add_new_function_rules() in second_method/second_method_function_transformation.py (this function is now commented), and call the function in transform_functions().
 o	In second_method/second_method_propagators.py, in the function group_propagators(), remove the for loop that adds a FunctionPropagator for every function in the theory.
 -	To test the second method without incremental propagation, you have to change the parameter choice to 4 in the function generate() in second_method/second_method_generate.py. Warning: this change regularly results in bugs in the generated code.
+
+
 The three changes in the second method mentioned here lead to worse performance than the second method with caching, with function propagators and with incremental propagation. This is shown in the experiments of my thesis text. Therefore, they are only for illustrative purposes. 
 Note that the implementation of propagation inference on mathematical operators (<, <=, >, >=, =, ~=) is not optimal regarding time efficiency.
 Also note that the compiler doesn’t do all necessary checks on correct IDP syntax, so an IDP program with wrong syntax can lead to unpredictable behavior: either an exception in the compiler, an exception in the generated code, or wrong propagation results. Especially, do not forget to end rules in the theory and interpretations in the structure with a dot.
