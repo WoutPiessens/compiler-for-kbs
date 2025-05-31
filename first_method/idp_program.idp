@@ -1,0 +1,19 @@
+vocabulary V {
+    type Node := {1..10}
+    A: Node-> Bool
+    B: Node-> Bool
+}
+
+structure S:V {
+}
+
+theory T:V {
+    !x in Node: A(x) <=> ~B(x).
+    A(5).
+    ~B(4).
+}
+
+
+procedure main() {
+    pretty_print(Theory(T,S).propagate())
+}
