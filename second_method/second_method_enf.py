@@ -15,8 +15,8 @@
 #   - Handling duplicate names in the same ENF rule.
 #   - Code for adding new auxiliary predicates to the list of predicates (important for later steps, more precisely the generation of DataArrays)
 
-from second_method.second_method_parsing import Term, Atom, UniversalQuantifier, ExistentialQuantifier, Predicate
-from second_method.second_method_nnf import Literal, And_mul, Or_mul
+from second_method_parsing import Term, Atom, UniversalQuantifier, ExistentialQuantifier, Predicate
+from second_method_nnf import Literal, And_mul, Or_mul
 
 # Represents rules of the following type: true <=> _X1
 class AssertLiteral:

@@ -1079,17 +1079,57 @@ def get_grounded_atoms_for_display(atom_name):
         ground_atoms[ground_atom_name] = data_array.loc[comb].values.item()
     return ground_atoms
 
-def store_consequences():
+def test_on_user_input():
+    current_var = ''
     start = time.time()
     initial_propagation()
     end = time.time()
     print('Initial propagation: ', (end - start))
-    consequences_dict = {}
-    for name in predicate_dict.keys():
-        if ((name not in ['edge']) and (not name.startswith('_'))):
-            data_array = predicate_dict[name]
-            new_domains = [data_array.coords[dim].values for dim in data_array.dims]
-            consequences_dict[name] = {tuple((c.item() for c in comb)) for comb in product(*new_domains) if (data_array.loc[comb].values.item() == EB.TRUE)}
-    with open('consequences.pkl', 'wb') as f:
-        pickle.dump(consequences_dict, f)
-store_consequences()
+    for var_name in predicate_dict.keys():
+        if (not var_name.startswith('_')):
+            print('__________________________')
+            grounded_var = get_grounded_atoms_for_display(var_name)
+            for (key, val) in grounded_var.items():
+                print(((key + ': ') + str(val)))
+            print('__________________________')
+    while (current_var.lower() != 'stop'):
+        current_var = input('Give the name of the variable\n')
+        if (current_var not in predicate_dict.keys()):
+            print("Try again, this variable doesn't exist")
+            continue
+        args = []
+        for i in range(len(predicate_dict[current_var].dims)):
+            new_arg = input(f'''Give argument number {(i + 1)}:
+''')
+            if new_arg.isdigit():
+                args.append(int(new_arg))
+            else:
+                args.append(new_arg)
+        b = input('True (1) or false (0)?\n')
+        if (b != '0'):
+            b_val = EB.TRUE
+        else:
+            b_val = EB.FALSE
+        current_array = predicate_dict[current_var]
+        if (current_array.loc[(*args,)] == EB.UNKNOWN):
+            current_array.loc[(*args,)] = b_val
+        else:
+            print('Sorry, this variable is already assigned a value')
+            continue
+        change = {}
+        if (b_val == EB.TRUE):
+            append_changes(change, {current_var: Change(current_var, [tuple(args)], [])})
+        else:
+            append_changes(change, {current_var: Change(current_var, [], [tuple(args)])})
+        start = time.time()
+        propagate_full(change)
+        end = time.time()
+        for var_name in predicate_dict.keys():
+            if (not var_name.startswith('_')):
+                print('__________________________')
+                grounded_var = get_grounded_atoms_for_display(var_name)
+                for (key, val) in grounded_var.items():
+                    print(((key + ': ') + str(val)))
+                print('__________________________')
+        print('Time to propagate: ', (end - start))
+test_on_user_input()

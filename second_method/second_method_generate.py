@@ -8,9 +8,9 @@
 from ast import *
 import random
 import time
-from second_method.second_method_parsing import IntegerRange
-from second_method.second_method_enf import ENFConjunctive, ENFDisjunctive, ENFExistential, ENFUniversal, ENFReductive, AssertLiteral
-from second_method.second_method_propagators import NormalPropagator, SpecifyingPropagator, GeneralizingPropagator, FunctionPropagator
+from second_method_parsing import IntegerRange
+from second_method_enf import ENFConjunctive, ENFDisjunctive, ENFExistential, ENFUniversal, ENFReductive, AssertLiteral
+from second_method_propagators import NormalPropagator, SpecifyingPropagator, GeneralizingPropagator, FunctionPropagator
 
 import astunparse
 

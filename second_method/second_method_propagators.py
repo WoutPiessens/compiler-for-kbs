@@ -5,7 +5,7 @@
 #   - for every function in the original IDP-program, a function propagator is added.
 
 
-from second_method.second_method_enf import AssertLiteral, ENFConjunctive, ENFDisjunctive, ENFUniversal, ENFExistential, ENFReductive
+from second_method_enf import AssertLiteral, ENFConjunctive, ENFDisjunctive, ENFUniversal, ENFExistential, ENFReductive
 
 # This class represents normal propagators, as mentioned in section 4.4.3.1.
 class NormalPropagator:

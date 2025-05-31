@@ -12,7 +12,7 @@ from enum import Enum
 
 import astunparse
 
-from first_method.first_method_enf import ENFConjunctive, ENFDisjunctive, AssertLiteral, Literal
+from first_method_enf import ENFConjunctive, ENFDisjunctive, AssertLiteral, Literal
 
 
 

@@ -10,9 +10,9 @@
 # More details about this part of the compiler can be found in the thesis text, in section 4.3.5.
 
 
-from first_method.first_method_parsing import Term, Atom, IntegerRange
-from first_method.first_method_nnf import Literal
-from first_method.first_method_enf import ENFUniversal, ENFExistential, ENFDisjunctive, ENFConjunctive, AssertLiteral
+from first_method_parsing import Term, Atom, IntegerRange
+from first_method_nnf import Literal
+from first_method_enf import ENFUniversal, ENFExistential, ENFDisjunctive, ENFConjunctive, AssertLiteral
 from itertools import product
 
 

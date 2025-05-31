@@ -8,8 +8,8 @@
 # More details about this part of the compiler can be found in the thesis text, in section 4.3.4.
 
 
-from first_method.first_method_parsing import Term, Atom, UniversalQuantifier, ExistentialQuantifier
-from first_method.first_method_nnf import Literal, And_mul, Or_mul
+from first_method_parsing import Term, Atom, UniversalQuantifier, ExistentialQuantifier
+from first_method_nnf import Literal, And_mul, Or_mul
 
 # Represents rules of the following type: true <=> _X1
 class AssertLiteral:

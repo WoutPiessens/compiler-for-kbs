@@ -14,9 +14,7 @@
 import time
 from datetime import datetime
 import pandas as pd
-from first_method import (first_method_parsing, first_method_function_transformation, first_method_nnf,
-                          first_method_enf, first_method_grounding, first_method_unsat_sets, first_method_propagators,
-                          first_method_generate)
+import first_method_parsing, first_method_function_transformation, first_method_nnf,first_method_enf, first_method_grounding, first_method_unsat_sets, first_method_propagators,first_method_generate
 
 def main():
     start_compilation = time.time()
@@ -35,9 +33,9 @@ def main():
     end_compilation = time.time()
     compilation_time = end_compilation - start_compilation
     print("Compilation time: ", compilation_time)
-    file_path = "../experimental_data.csv"
-    new_row = {"timestamp": datetime.now(), "value": compilation_time}
-    data_frame_row = pd.DataFrame([new_row])
-    data_frame_row.to_csv(file_path, mode='a', header=not pd.io.common.file_exists(file_path), index=False)
+    #file_path = "../experimental_data.csv"
+    #new_row = {"timestamp": datetime.now(), "value": compilation_time}
+    #data_frame_row = pd.DataFrame([new_row])
+    #data_frame_row.to_csv(file_path, mode='a', header=not pd.io.common.file_exists(file_path), index=False)
 
 main()

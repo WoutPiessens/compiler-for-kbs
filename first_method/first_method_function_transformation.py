@@ -15,7 +15,7 @@
 
 
 
-from first_method.first_method_parsing import Equivalent, Implies, And, Or, Not, UniversalQuantifier, ExistentialQuantifier, Atom, Term, Variable
+from first_method_parsing import Equivalent, Implies, And, Or, Not, UniversalQuantifier, ExistentialQuantifier, Atom, Term, Variable
 
 # Helper function to find the predicate corresponding to a certain name.
 # This is done in order to get relevant information regarding the type signature.

@@ -10,7 +10,7 @@
 
 
 
-from first_method.first_method_enf import ENFDisjunctive, ENFConjunctive, AssertLiteral
+from first_method_enf import ENFDisjunctive, ENFConjunctive, AssertLiteral
 
 # Function that handles the transformation from an ENF-rule to multiple UNSAT-sets.
 def derive_unsat_sets_for_rule(enf_rule):

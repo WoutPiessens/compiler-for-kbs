@@ -14,7 +14,7 @@
 # The alternative for adding these rules is adding function propagators (in a later step), this is discussed in section 4.4.3.4.
 
 
-from second_method.second_method_parsing import Equivalent, Implies, And, Or, Not, UniversalQuantifier, ExistentialQuantifier, Atom, Term, Variable
+from second_method_parsing import Equivalent, Implies, And, Or, Not, UniversalQuantifier, ExistentialQuantifier, Atom, Term, Variable
 
 # Helper function to find the predicate corresponding to a certain name.
 # This is done in order to get relevant information regarding the type signature.

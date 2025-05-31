@@ -11,7 +11,7 @@
 
 
 
-from second_method.second_method_parsing import Exp, Equivalent, Implies, And, Or, Not, UniversalQuantifier, ExistentialQuantifier, Atom, Term, Variable
+from second_method_parsing import Exp, Equivalent, Implies, And, Or, Not, UniversalQuantifier, ExistentialQuantifier, Atom, Term, Variable
 
 
 class Literal(Exp):
