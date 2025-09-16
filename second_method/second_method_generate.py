@@ -69,6 +69,9 @@ def generate_imports():
             alias(name='math')]),
       Import(
          names=[
+            alias(name='random')]),
+      Import(
+         names=[
             alias(name='time')]),
       Import(
          names=[
@@ -6949,6 +6952,356 @@ def generate_get_grounded_atoms_for_display():
          decorator_list=[])],
    type_ignores=[])
 
+
+
+# AST of an auxiliary function
+
+def generate_get_pred_and_comb_from_grounded_atom():
+   return Module(
+   body=[
+      FunctionDef(
+         name='get_pred_and_comb_from_grounded_atom',
+         args=arguments(
+            posonlyargs=[],
+            args=[
+               arg(arg='name')],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[]),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='splitted_name', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='name', ctx=Load()),
+                     attr='split',
+                     ctx=Load()),
+                  args=[
+                     Constant(value='_')],
+                  keywords=[])),
+            Assign(
+               targets=[
+                  Name(id='pred', ctx=Store())],
+               value=Subscript(
+                  value=Name(id='splitted_name', ctx=Load()),
+                  slice=Constant(value=0),
+                  ctx=Load())),
+            Assign(
+               targets=[
+                  Name(id='comb', ctx=Store())],
+               value=Call(
+                  func=Name(id='tuple', ctx=Load()),
+                  args=[],
+                  keywords=[])),
+            For(
+               target=Name(id='i', ctx=Store()),
+               iter=Call(
+                  func=Name(id='range', ctx=Load()),
+                  args=[
+                     Constant(value=1),
+                     Call(
+                        func=Name(id='len', ctx=Load()),
+                        args=[
+                           Name(id='splitted_name', ctx=Load())],
+                        keywords=[])],
+                  keywords=[]),
+               body=[
+                  Assign(
+                     targets=[
+                        Name(id='arg', ctx=Store())],
+                     value=Subscript(
+                        value=Name(id='splitted_name', ctx=Load()),
+                        slice=Name(id='i', ctx=Load()),
+                        ctx=Load())),
+                  If(
+                     test=Call(
+                        func=Attribute(
+                           value=Name(id='arg', ctx=Load()),
+                           attr='isdigit',
+                           ctx=Load()),
+                        args=[],
+                        keywords=[]),
+                     body=[
+                        Assign(
+                           targets=[
+                              Name(id='comb', ctx=Store())],
+                           value=BinOp(
+                              left=Name(id='comb', ctx=Load()),
+                              op=Add(),
+                              right=Tuple(
+                                 elts=[
+                                    Call(
+                                       func=Name(id='int', ctx=Load()),
+                                       args=[
+                                          Name(id='arg', ctx=Load())],
+                                       keywords=[])],
+                                 ctx=Load())))],
+                     orelse=[
+                        Assign(
+                           targets=[
+                              Name(id='comb', ctx=Store())],
+                           value=BinOp(
+                              left=Name(id='comb', ctx=Load()),
+                              op=Add(),
+                              right=Tuple(
+                                 elts=[
+                                    Name(id='arg', ctx=Load())],
+                                 ctx=Load())))])],
+               orelse=[]),
+            Return(
+               value=Tuple(
+                  elts=[
+                     Name(id='pred', ctx=Load()),
+                     Name(id='comb', ctx=Load())],
+                  ctx=Load()))],
+         decorator_list=[])],
+   type_ignores=[])
+
+
+
+
+# AST of an auxiliary function
+
+def generate_exists_unassigned_atom():
+   return Module(
+   body=[
+      FunctionDef(
+         name='exists_unassigned_atom',
+         args=arguments(
+            posonlyargs=[],
+            args=[],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[]),
+         body=[
+            Return(
+               value=Call(
+                  func=Name(id='any', ctx=Load()),
+                  args=[
+                     GeneratorExp(
+                        elt=Call(
+                           func=Attribute(
+                              value=Call(
+                                 func=Attribute(
+                                    value=Compare(
+                                       left=Name(id='data_array', ctx=Load()),
+                                       ops=[
+                                          Eq()],
+                                       comparators=[
+                                          Attribute(
+                                             value=Name(id='EB', ctx=Load()),
+                                             attr='UNKNOWN',
+                                             ctx=Load())]),
+                                    attr='any',
+                                    ctx=Load()),
+                                 args=[],
+                                 keywords=[]),
+                              attr='item',
+                              ctx=Load()),
+                           args=[],
+                           keywords=[]),
+                        generators=[
+                           comprehension(
+                              target=Name(id='data_array', ctx=Store()),
+                              iter=Call(
+                                 func=Name(id='list', ctx=Load()),
+                                 args=[
+                                    Call(
+                                       func=Attribute(
+                                          value=Name(id='predicate_dict', ctx=Load()),
+                                          attr='values',
+                                          ctx=Load()),
+                                       args=[],
+                                       keywords=[])],
+                                 keywords=[]),
+                              ifs=[
+                                 UnaryOp(
+                                    op=Not(),
+                                    operand=Call(
+                                       func=Attribute(
+                                          value=Attribute(
+                                             value=Name(id='data_array', ctx=Load()),
+                                             attr='name',
+                                             ctx=Load()),
+                                          attr='startswith',
+                                          ctx=Load()),
+                                       args=[
+                                          Constant(value='_')],
+                                       keywords=[]))],
+                              is_async=0)])],
+                  keywords=[]))],
+         decorator_list=[])],
+   type_ignores=[])
+
+
+# AST of an auxiliary function
+
+def generate_pick_random_change():
+   return Module(
+   body=[
+      FunctionDef(
+         name='pick_random_change',
+         args=arguments(
+            posonlyargs=[],
+            args=[],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[]),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='atoms', ctx=Store())],
+               value=Dict(keys=[], values=[])),
+            For(
+               target=Name(id='pred_name', ctx=Store()),
+               iter=Call(
+                  func=Attribute(
+                     value=Name(id='predicate_dict', ctx=Load()),
+                     attr='keys',
+                     ctx=Load()),
+                  args=[],
+                  keywords=[]),
+               body=[
+                  If(
+                     test=UnaryOp(
+                        op=Not(),
+                        operand=Call(
+                           func=Attribute(
+                              value=Name(id='pred_name', ctx=Load()),
+                              attr='startswith',
+                              ctx=Load()),
+                           args=[
+                              Constant(value='_')],
+                           keywords=[])),
+                     body=[
+                        Expr(
+                           value=Call(
+                              func=Attribute(
+                                 value=Name(id='atoms', ctx=Load()),
+                                 attr='update',
+                                 ctx=Load()),
+                              args=[
+                                 Call(
+                                    func=Name(id='get_grounded_atoms_for_display', ctx=Load()),
+                                    args=[
+                                       Name(id='pred_name', ctx=Load())],
+                                    keywords=[])],
+                              keywords=[]))],
+                     orelse=[])],
+               orelse=[]),
+            Assign(
+               targets=[
+                  Name(id='unknown_atoms', ctx=Store())],
+               value=ListComp(
+                  elt=Name(id='k', ctx=Load()),
+                  generators=[
+                     comprehension(
+                        target=Tuple(
+                           elts=[
+                              Name(id='k', ctx=Store()),
+                              Name(id='v', ctx=Store())],
+                           ctx=Store()),
+                        iter=Call(
+                           func=Attribute(
+                              value=Name(id='atoms', ctx=Load()),
+                              attr='items',
+                              ctx=Load()),
+                           args=[],
+                           keywords=[]),
+                        ifs=[
+                           Compare(
+                              left=Name(id='v', ctx=Load()),
+                              ops=[
+                                 Eq()],
+                              comparators=[
+                                 Attribute(
+                                    value=Name(id='EB', ctx=Load()),
+                                    attr='UNKNOWN',
+                                    ctx=Load())])],
+                        is_async=0)])),
+            Assign(
+               targets=[
+                  Name(id='unknown_atom', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='random', ctx=Load()),
+                     attr='choice',
+                     ctx=Load()),
+                  args=[
+                     Name(id='unknown_atoms', ctx=Load())],
+                  keywords=[])),
+            Assign(
+               targets=[
+                  Tuple(
+                     elts=[
+                        Name(id='pred', ctx=Store()),
+                        Name(id='comb', ctx=Store())],
+                     ctx=Store())],
+               value=Call(
+                  func=Name(id='get_pred_and_comb_from_grounded_atom', ctx=Load()),
+                  args=[
+                     Name(id='unknown_atom', ctx=Load())],
+                  keywords=[])),
+            Assign(
+               targets=[
+                  Name(id='random_pol', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='random', ctx=Load()),
+                     attr='choice',
+                     ctx=Load()),
+                  args=[
+                     List(
+                        elts=[
+                           Attribute(
+                              value=Name(id='EB', ctx=Load()),
+                              attr='TRUE',
+                              ctx=Load()),
+                           Attribute(
+                              value=Name(id='EB', ctx=Load()),
+                              attr='FALSE',
+                              ctx=Load())],
+                        ctx=Load())],
+                  keywords=[])),
+            If(
+               test=Compare(
+                  left=Name(id='random_pol', ctx=Load()),
+                  ops=[
+                     Eq()],
+                  comparators=[
+                     Attribute(
+                        value=Name(id='EB', ctx=Load()),
+                        attr='TRUE',
+                        ctx=Load())]),
+               body=[
+                  Return(
+                     value=Call(
+                        func=Name(id='Change', ctx=Load()),
+                        args=[
+                           Name(id='pred', ctx=Load()),
+                           List(
+                              elts=[
+                                 Name(id='comb', ctx=Load())],
+                              ctx=Load()),
+                           List(elts=[], ctx=Load())],
+                        keywords=[]))],
+               orelse=[
+                  Return(
+                     value=Call(
+                        func=Name(id='Change', ctx=Load()),
+                        args=[
+                           Name(id='pred', ctx=Load()),
+                           List(elts=[], ctx=Load()),
+                           List(
+                              elts=[
+                                 Name(id='comb', ctx=Load())],
+                              ctx=Load())],
+                        keywords=[]))])],
+         decorator_list=[])],
+   type_ignores=[])
+
+
 # AST of an auxiliary function
 def generate_terminal_test():
     return Module(
@@ -7458,6 +7811,379 @@ def generate_terminal_test():
             args=[],
             keywords=[]))],
    type_ignores=[])
+
+
+
+
+def generate_test_on_random_input():
+   return Module(
+   body=[
+      FunctionDef(
+         name='test_on_random_input',
+         args=arguments(
+            posonlyargs=[],
+            args=[],
+            kwonlyargs=[],
+            kw_defaults=[],
+            defaults=[]),
+         body=[
+            Assign(
+               targets=[
+                  Name(id='start', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='time', ctx=Load()),
+                     attr='time',
+                     ctx=Load()),
+                  args=[],
+                  keywords=[])),
+            Expr(
+               value=Call(
+                  func=Name(id='initial_propagation', ctx=Load()),
+                  args=[],
+                  keywords=[])),
+            Assign(
+               targets=[
+                  Name(id='end', ctx=Store())],
+               value=Call(
+                  func=Attribute(
+                     value=Name(id='time', ctx=Load()),
+                     attr='time',
+                     ctx=Load()),
+                  args=[],
+                  keywords=[])),
+            Expr(
+               value=Call(
+                  func=Name(id='print', ctx=Load()),
+                  args=[
+                     Constant(value='Initial propagation: '),
+                     BinOp(
+                        left=Name(id='end', ctx=Load()),
+                        op=Sub(),
+                        right=Name(id='start', ctx=Load()))],
+                  keywords=[])),
+            Assign(
+               targets=[
+                  Name(id='count', ctx=Store())],
+               value=Constant(value=0)),
+            While(
+               test=Call(
+                  func=Name(id='exists_unassigned_atom', ctx=Load()),
+                  args=[],
+                  keywords=[]),
+               body=[
+                  AugAssign(
+                     target=Name(id='count', ctx=Store()),
+                     op=Add(),
+                     value=Constant(value=1)),
+                  Assign(
+                     targets=[
+                        Name(id='change', ctx=Store())],
+                     value=Call(
+                        func=Name(id='pick_random_change', ctx=Load()),
+                        args=[],
+                        keywords=[])),
+                  Expr(
+                     value=Call(
+                        func=Name(id='print', ctx=Load()),
+                        args=[
+                           BinOp(
+                              left=Constant(value='Changed predicate: '),
+                              op=Add(),
+                              right=Attribute(
+                                 value=Name(id='change', ctx=Load()),
+                                 attr='name',
+                                 ctx=Load()))],
+                        keywords=[])),
+                  If(
+                     test=Compare(
+                        left=Call(
+                           func=Name(id='len', ctx=Load()),
+                           args=[
+                              Attribute(
+                                 value=Name(id='change', ctx=Load()),
+                                 attr='true_slicing',
+                                 ctx=Load())],
+                           keywords=[]),
+                        ops=[
+                           Gt()],
+                        comparators=[
+                           Constant(value=0)]),
+                     body=[
+                        Assign(
+                           targets=[
+                              Name(id='current_array', ctx=Store())],
+                           value=Subscript(
+                              value=Name(id='predicate_dict', ctx=Load()),
+                              slice=Attribute(
+                                 value=Name(id='change', ctx=Load()),
+                                 attr='name',
+                                 ctx=Load()),
+                              ctx=Load())),
+                        Assign(
+                           targets=[
+                              Name(id='args', ctx=Store())],
+                           value=Subscript(
+                              value=Attribute(
+                                 value=Name(id='change', ctx=Load()),
+                                 attr='true_slicing',
+                                 ctx=Load()),
+                              slice=Constant(value=0),
+                              ctx=Load())),
+                        Expr(
+                           value=Call(
+                              func=Name(id='print', ctx=Load()),
+                              args=[
+                                 BinOp(
+                                    left=BinOp(
+                                       left=Constant(value='Changed argument: '),
+                                       op=Add(),
+                                       right=Call(
+                                          func=Name(id='str', ctx=Load()),
+                                          args=[
+                                             Name(id='args', ctx=Load())],
+                                          keywords=[])),
+                                    op=Add(),
+                                    right=Constant(value=' to true'))],
+                              keywords=[])),
+                        Assign(
+                           targets=[
+                              Subscript(
+                                 value=Attribute(
+                                    value=Name(id='current_array', ctx=Load()),
+                                    attr='loc',
+                                    ctx=Load()),
+                                 slice=Tuple(
+                                    elts=[
+                                       Starred(
+                                          value=Name(id='args', ctx=Load()),
+                                          ctx=Load())],
+                                    ctx=Load()),
+                                 ctx=Store())],
+                           value=Attribute(
+                              value=Name(id='EB', ctx=Load()),
+                              attr='TRUE',
+                              ctx=Load()))],
+                     orelse=[]),
+                  If(
+                     test=Compare(
+                        left=Call(
+                           func=Name(id='len', ctx=Load()),
+                           args=[
+                              Attribute(
+                                 value=Name(id='change', ctx=Load()),
+                                 attr='false_slicing',
+                                 ctx=Load())],
+                           keywords=[]),
+                        ops=[
+                           Gt()],
+                        comparators=[
+                           Constant(value=0)]),
+                     body=[
+                        Assign(
+                           targets=[
+                              Name(id='current_array', ctx=Store())],
+                           value=Subscript(
+                              value=Name(id='predicate_dict', ctx=Load()),
+                              slice=Attribute(
+                                 value=Name(id='change', ctx=Load()),
+                                 attr='name',
+                                 ctx=Load()),
+                              ctx=Load())),
+                        Assign(
+                           targets=[
+                              Name(id='args', ctx=Store())],
+                           value=Subscript(
+                              value=Attribute(
+                                 value=Name(id='change', ctx=Load()),
+                                 attr='false_slicing',
+                                 ctx=Load()),
+                              slice=Constant(value=0),
+                              ctx=Load())),
+                        Expr(
+                           value=Call(
+                              func=Name(id='print', ctx=Load()),
+                              args=[
+                                 BinOp(
+                                    left=BinOp(
+                                       left=Constant(value='Changed argument: '),
+                                       op=Add(),
+                                       right=Call(
+                                          func=Name(id='str', ctx=Load()),
+                                          args=[
+                                             Name(id='args', ctx=Load())],
+                                          keywords=[])),
+                                    op=Add(),
+                                    right=Constant(value=' to false'))],
+                              keywords=[])),
+                        Assign(
+                           targets=[
+                              Subscript(
+                                 value=Attribute(
+                                    value=Name(id='current_array', ctx=Load()),
+                                    attr='loc',
+                                    ctx=Load()),
+                                 slice=Tuple(
+                                    elts=[
+                                       Starred(
+                                          value=Name(id='args', ctx=Load()),
+                                          ctx=Load())],
+                                    ctx=Load()),
+                                 ctx=Store())],
+                           value=Attribute(
+                              value=Name(id='EB', ctx=Load()),
+                              attr='FALSE',
+                              ctx=Load()))],
+                     orelse=[]),
+                  Assign(
+                     targets=[
+                        Name(id='start', ctx=Store())],
+                     value=Call(
+                        func=Attribute(
+                           value=Name(id='time', ctx=Load()),
+                           attr='time',
+                           ctx=Load()),
+                        args=[],
+                        keywords=[])),
+                  Expr(
+                     value=Call(
+                        func=Name(id='propagate_full', ctx=Load()),
+                        args=[
+                           Dict(
+                              keys=[
+                                 Attribute(
+                                    value=Name(id='change', ctx=Load()),
+                                    attr='name',
+                                    ctx=Load())],
+                              values=[
+                                 Name(id='change', ctx=Load())])],
+                        keywords=[])),
+                  Assign(
+                     targets=[
+                        Name(id='end', ctx=Store())],
+                     value=Call(
+                        func=Attribute(
+                           value=Name(id='time', ctx=Load()),
+                           attr='time',
+                           ctx=Load()),
+                        args=[],
+                        keywords=[])),
+                  For(
+                     target=Name(id='var_name', ctx=Store()),
+                     iter=Call(
+                        func=Attribute(
+                           value=Name(id='predicate_dict', ctx=Load()),
+                           attr='keys',
+                           ctx=Load()),
+                        args=[],
+                        keywords=[]),
+                     body=[
+                        If(
+                           test=UnaryOp(
+                              op=Not(),
+                              operand=Call(
+                                 func=Attribute(
+                                    value=Name(id='var_name', ctx=Load()),
+                                    attr='startswith',
+                                    ctx=Load()),
+                                 args=[
+                                    Constant(value='_')],
+                                 keywords=[])),
+                           body=[
+                              Expr(
+                                 value=Call(
+                                    func=Name(id='print', ctx=Load()),
+                                    args=[
+                                       Constant(value='__________________________')],
+                                    keywords=[])),
+                              Assign(
+                                 targets=[
+                                    Name(id='grounded_var', ctx=Store())],
+                                 value=Call(
+                                    func=Name(id='get_grounded_atoms_for_display', ctx=Load()),
+                                    args=[
+                                       Name(id='var_name', ctx=Load())],
+                                    keywords=[])),
+                              For(
+                                 target=Tuple(
+                                    elts=[
+                                       Name(id='key', ctx=Store()),
+                                       Name(id='val', ctx=Store())],
+                                    ctx=Store()),
+                                 iter=Call(
+                                    func=Attribute(
+                                       value=Name(id='grounded_var', ctx=Load()),
+                                       attr='items',
+                                       ctx=Load()),
+                                    args=[],
+                                    keywords=[]),
+                                 body=[
+                                    Expr(
+                                       value=Call(
+                                          func=Name(id='print', ctx=Load()),
+                                          args=[
+                                             BinOp(
+                                                left=BinOp(
+                                                   left=Name(id='key', ctx=Load()),
+                                                   op=Add(),
+                                                   right=Constant(value=': ')),
+                                                op=Add(),
+                                                right=Call(
+                                                   func=Name(id='str', ctx=Load()),
+                                                   args=[
+                                                      Name(id='val', ctx=Load())],
+                                                   keywords=[]))],
+                                          keywords=[]))],
+                                 orelse=[]),
+                              Expr(
+                                 value=Call(
+                                    func=Name(id='print', ctx=Load()),
+                                    args=[
+                                       Constant(value='__________________________')],
+                                    keywords=[]))],
+                           orelse=[])],
+                     orelse=[]),
+                  Expr(
+                     value=Call(
+                        func=Name(id='print', ctx=Load()),
+                        args=[
+                           Constant(value='Time to propagate: '),
+                           BinOp(
+                              left=Name(id='end', ctx=Load()),
+                              op=Sub(),
+                              right=Name(id='start', ctx=Load()))],
+                        keywords=[]))],
+               orelse=[]),
+            Expr(
+               value=Call(
+                  func=Name(id='print', ctx=Load()),
+                  args=[],
+                  keywords=[])),
+            Expr(
+               value=Call(
+                  func=Name(id='print', ctx=Load()),
+                  args=[
+                     BinOp(
+                        left=BinOp(
+                           left=Constant(value='Propagation finished using '),
+                           op=Add(),
+                           right=Call(
+                              func=Name(id='str', ctx=Load()),
+                              args=[
+                                 Name(id='count', ctx=Load())],
+                              keywords=[])),
+                        op=Add(),
+                        right=Constant(value=' random assignment(s).'))],
+                  keywords=[]))],
+         decorator_list=[]),
+      Expr(
+         value=Call(
+            func=Name(id='test_on_random_input', ctx=Load()),
+            args=[],
+            keywords=[]))],
+   type_ignores=[])
+
+
 
 
 # AST of an auxiliary function
@@ -9110,9 +9836,14 @@ def generate(enf_rules, grouped_propagators, types, predicates, functions, inter
     fill_in_interpreted_domain = generate_fill_in_interpreted_domain()
     get_changes_for_comparison_operators = generate_get_changes_for_comparison_operators()
     initial_propagation = generate_initial_propagation(grouped_propagators, equality_domain, interpreted_predicates, operator_set)
+    get_pred_and_comb_from_grounded_atom = generate_get_pred_and_comb_from_grounded_atom()
     get_grounded_atom_name = generate_get_grounded_atom_name()
     get_grounded_atoms_for_display = generate_get_grounded_atoms_for_display()
+    exists_unassigned_atom = generate_exists_unassigned_atom()
+    pick_random_change = generate_pick_random_change()
+
     terminal_test = generate_terminal_test()
+    test_on_random_input = generate_test_on_random_input()
     dash_functionality = generate_dash_functionality()
     write_functionality = generate_write_functionality(interpreted_predicates)
     #prop_list = generate_propagate_rule_from_unsat_set(grouped_propagators['_X2'][0], '_X2', True)
@@ -9121,7 +9852,7 @@ def generate(enf_rules, grouped_propagators, types, predicates, functions, inter
     #module = Module(body=gen_prop.body)
 
     # Uncomment to work without incremental propagation (only for testing purposes, this method is not bug free!)
-    #choice = 4
+    #choice = 5
     if choice == 1:
         module = Module(body=imports.body + auxiliary_classes.body + data_arrays.body + data_arrays_extra_dash.body + true_and_unknown_lists.body + conditional_propagate.body + unconditional_propagate.body + get_from_data_array.body + inverse.body + append_changes.body + get_from_data_array_wrap.body + write_to_data_array.body + handle_conditional_propagate_results.body +
                          normal_propagation.body + handle_unconditional_propagate_results.body + unconditional_propagate_wrap.body + calculate_first_coordinate.body + calculate_next_coordinate.body + incremental_propagate.body + incremental_propagate_wrap.body + map_indices.body + is_valid_index.body + map_indices_wrap.body + add_dims.body + reduce_dims.body + specifying_propagation.body +
@@ -9134,9 +9865,14 @@ def generate(enf_rules, grouped_propagators, types, predicates, functions, inter
         module = Module(body=imports.body + auxiliary_classes.body + data_arrays.body + data_arrays_extra.body + true_and_unknown_lists.body + conditional_propagate.body + unconditional_propagate.body + get_from_data_array.body + inverse.body + append_changes.body + get_from_data_array_wrap.body + write_to_data_array.body + handle_conditional_propagate_results.body +
                          normal_propagation.body + handle_unconditional_propagate_results.body + unconditional_propagate_wrap.body + calculate_first_coordinate.body + calculate_next_coordinate.body + incremental_propagate.body + incremental_propagate_wrap.body + map_indices.body + is_valid_index.body + map_indices_wrap.body + add_dims.body + reduce_dims.body + specifying_propagation.body +
                          generalizing_propagation.body + add_all_function_outputs.body + function_propagation.body + propagate.body + propagate_full.body + fill_in_interpreted_domain.body + get_changes_for_comparison_operators.body + initial_propagation.body + get_grounded_atom_name.body + get_grounded_atoms_for_display.body + write_functionality.body)
+    elif choice == 4:
+        module = Module(body=imports.body + auxiliary_classes.body + data_arrays.body + data_arrays_extra.body + true_and_unknown_lists.body + conditional_propagate.body + unconditional_propagate.body + get_from_data_array.body + inverse.body + append_changes.body + get_from_data_array_wrap.body + write_to_data_array.body + handle_conditional_propagate_results.body +
+                         normal_propagation.body + handle_unconditional_propagate_results.body + unconditional_propagate_wrap.body + calculate_first_coordinate.body + calculate_next_coordinate.body + incremental_propagate.body + incremental_propagate_wrap.body + map_indices.body + is_valid_index.body + map_indices_wrap.body + add_dims.body + reduce_dims.body + specifying_propagation.body +
+                         generalizing_propagation.body + add_all_function_outputs.body + function_propagation.body + propagate.body + propagate_full.body + fill_in_interpreted_domain.body + get_changes_for_comparison_operators.body + initial_propagation.body + get_grounded_atom_name.body + get_pred_and_comb_from_grounded_atom.body + get_grounded_atoms_for_display.body +
+                             exists_unassigned_atom.body + pick_random_change.body + test_on_random_input.body)
 
     # No incremental propagation
-    elif choice == 4:
+    elif choice == 5:
         module = Module(body=imports.body + auxiliary_classes.body + data_arrays.body + data_arrays_extra.body + true_and_unknown_lists.body + conditional_propagate.body + unconditional_propagate.body + get_from_data_array.body + inverse.body + append_changes.body + get_from_data_array_wrap.body + write_to_data_array.body + handle_conditional_propagate_results.body +
                          normal_propagation.body + handle_unconditional_propagate_results.body + unconditional_propagate_wrap.body + calculate_first_coordinate.body + calculate_next_coordinate.body + incremental_propagate.body + incremental_propagate_wrap.body + map_indices.body + is_valid_index.body + map_indices_wrap.body + add_dims.body + reduce_dims.body + specifying_propagation_2.body +
                          generate_rule.body + generalizing_propagation_2.body + add_all_function_outputs.body + function_propagation_2.body + propagate.body + propagate_full.body + fill_in_interpreted_domain.body + get_changes_for_comparison_operators.body + initial_propagation.body + get_grounded_atom_name.body + get_grounded_atoms_for_display.body + terminal_test.body)

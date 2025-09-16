@@ -11,7 +11,11 @@
 # To see an example of a generated Python program with commentary, go to second_method_generated_code_example.py
 
 # Choice:
-# 1 for interactive application, 2 for terminal interaction, 3 for writing consequences to .pkl file (no interaction with user, only initial propagation)
+# 1 for interactive application,
+# 2 for terminal interaction,
+# 3 for writing consequences to .pkl file (no interaction with user, only initial propagation)
+# 4 for random assignments (no interaction with user, only initial propagation, continues until all assignments are made or until inconsistency)
+
 choice = 2
 
 import time
