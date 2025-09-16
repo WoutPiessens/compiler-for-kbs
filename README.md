@@ -41,3 +41,7 @@ Note that the implementation of propagation inference on mathematical operators 
 Also note that the compiler doesn’t do all necessary checks on correct IDP syntax, so an IDP program with wrong syntax can lead to unpredictable behavior: either an exception in the compiler, an exception in the generated code, or wrong propagation results. Especially, do not forget to end rules in the theory and interpretations in the structure with a dot.
 
 [1] https://gitlab.com/sli-lib/tree-sitter-fodot
+
+
+
+16 September 2025: update to support random assignments of truth values to atoms, to test multiple iterations of the propagation algorithm more easily. This update was done after completing the master thesis.
