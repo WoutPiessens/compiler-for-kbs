@@ -7817,373 +7817,422 @@ def generate_terminal_test():
 
 def generate_test_on_random_input():
    return Module(
-   body=[
-      FunctionDef(
-         name='test_on_random_input',
-         args=arguments(
-            posonlyargs=[],
-            args=[],
-            kwonlyargs=[],
-            kw_defaults=[],
-            defaults=[]),
-         body=[
-            Assign(
-               targets=[
-                  Name(id='start', ctx=Store())],
-               value=Call(
-                  func=Attribute(
-                     value=Name(id='time', ctx=Load()),
-                     attr='time',
-                     ctx=Load()),
-                  args=[],
-                  keywords=[])),
-            Expr(
-               value=Call(
-                  func=Name(id='initial_propagation', ctx=Load()),
-                  args=[],
-                  keywords=[])),
-            Assign(
-               targets=[
-                  Name(id='end', ctx=Store())],
-               value=Call(
-                  func=Attribute(
-                     value=Name(id='time', ctx=Load()),
-                     attr='time',
-                     ctx=Load()),
-                  args=[],
-                  keywords=[])),
-            Expr(
-               value=Call(
-                  func=Name(id='print', ctx=Load()),
-                  args=[
-                     Constant(value='Initial propagation: '),
-                     BinOp(
-                        left=Name(id='end', ctx=Load()),
-                        op=Sub(),
-                        right=Name(id='start', ctx=Load()))],
-                  keywords=[])),
-            Assign(
-               targets=[
-                  Name(id='count', ctx=Store())],
-               value=Constant(value=0)),
-            While(
-               test=Call(
-                  func=Name(id='exists_unassigned_atom', ctx=Load()),
-                  args=[],
-                  keywords=[]),
-               body=[
-                  AugAssign(
-                     target=Name(id='count', ctx=Store()),
-                     op=Add(),
-                     value=Constant(value=1)),
-                  Assign(
-                     targets=[
-                        Name(id='change', ctx=Store())],
-                     value=Call(
-                        func=Name(id='pick_random_change', ctx=Load()),
-                        args=[],
-                        keywords=[])),
-                  Expr(
-                     value=Call(
-                        func=Name(id='print', ctx=Load()),
-                        args=[
-                           BinOp(
-                              left=Constant(value='Changed predicate: '),
-                              op=Add(),
-                              right=Attribute(
-                                 value=Name(id='change', ctx=Load()),
-                                 attr='name',
-                                 ctx=Load()))],
-                        keywords=[])),
-                  If(
-                     test=Compare(
-                        left=Call(
-                           func=Name(id='len', ctx=Load()),
+      body=[
+         FunctionDef(
+            name='test_on_random_input',
+            args=arguments(
+               posonlyargs=[],
+               args=[],
+               kwonlyargs=[],
+               kw_defaults=[],
+               defaults=[]),
+            body=[
+               Assign(
+                  targets=[
+                     Name(id='start', ctx=Store())],
+                  value=Call(
+                     func=Attribute(
+                        value=Name(id='time', ctx=Load()),
+                        attr='time',
+                        ctx=Load()),
+                     args=[],
+                     keywords=[])),
+               Expr(
+                  value=Call(
+                     func=Name(id='initial_propagation', ctx=Load()),
+                     args=[],
+                     keywords=[])),
+               Assign(
+                  targets=[
+                     Name(id='end', ctx=Store())],
+                  value=Call(
+                     func=Attribute(
+                        value=Name(id='time', ctx=Load()),
+                        attr='time',
+                        ctx=Load()),
+                     args=[],
+                     keywords=[])),
+               Assign(
+                  targets=[
+                     Name(id='init_time', ctx=Store())],
+                  value=BinOp(
+                     left=Name(id='end', ctx=Load()),
+                     op=Sub(),
+                     right=Name(id='start', ctx=Load()))),
+               Expr(
+                  value=Call(
+                     func=Name(id='print', ctx=Load()),
+                     args=[
+                        Constant(value='Initial propagation: '),
+                        BinOp(
+                           left=Name(id='end', ctx=Load()),
+                           op=Sub(),
+                           right=Name(id='start', ctx=Load()))],
+                     keywords=[])),
+               Assign(
+                  targets=[
+                     Name(id='total_time', ctx=Store())],
+                  value=BinOp(
+                     left=Name(id='end', ctx=Load()),
+                     op=Sub(),
+                     right=Name(id='start', ctx=Load()))),
+               Assign(
+                  targets=[
+                     Name(id='count', ctx=Store())],
+                  value=Constant(value=0)),
+               While(
+                  test=Call(
+                     func=Name(id='exists_unassigned_atom', ctx=Load()),
+                     args=[],
+                     keywords=[]),
+                  body=[
+                     AugAssign(
+                        target=Name(id='count', ctx=Store()),
+                        op=Add(),
+                        value=Constant(value=1)),
+                     Assign(
+                        targets=[
+                           Name(id='changes', ctx=Store())],
+                        value=Dict(keys=[], values=[])),
+                     Assign(
+                        targets=[
+                           Name(id='change', ctx=Store())],
+                        value=Call(
+                           func=Name(id='pick_random_change', ctx=Load()),
+                           args=[],
+                           keywords=[])),
+                     Expr(
+                        value=Call(
+                           func=Name(id='append_changes', ctx=Load()),
                            args=[
-                              Attribute(
-                                 value=Name(id='change', ctx=Load()),
-                                 attr='true_slicing',
-                                 ctx=Load())],
-                           keywords=[]),
-                        ops=[
-                           Gt()],
-                        comparators=[
-                           Constant(value=0)]),
-                     body=[
-                        Assign(
-                           targets=[
-                              Name(id='current_array', ctx=Store())],
-                           value=Subscript(
-                              value=Name(id='predicate_dict', ctx=Load()),
-                              slice=Attribute(
-                                 value=Name(id='change', ctx=Load()),
-                                 attr='name',
-                                 ctx=Load()),
-                              ctx=Load())),
-                        Assign(
-                           targets=[
-                              Name(id='args', ctx=Store())],
-                           value=Subscript(
-                              value=Attribute(
-                                 value=Name(id='change', ctx=Load()),
-                                 attr='true_slicing',
-                                 ctx=Load()),
-                              slice=Constant(value=0),
-                              ctx=Load())),
-                        Expr(
-                           value=Call(
-                              func=Name(id='print', ctx=Load()),
-                              args=[
-                                 BinOp(
-                                    left=BinOp(
-                                       left=Constant(value='Changed argument: '),
-                                       op=Add(),
-                                       right=Call(
-                                          func=Name(id='str', ctx=Load()),
-                                          args=[
-                                             Name(id='args', ctx=Load())],
-                                          keywords=[])),
-                                    op=Add(),
-                                    right=Constant(value=' to true'))],
-                              keywords=[])),
-                        Assign(
-                           targets=[
-                              Subscript(
-                                 value=Attribute(
-                                    value=Name(id='current_array', ctx=Load()),
-                                    attr='loc',
-                                    ctx=Load()),
-                                 slice=Tuple(
-                                    elts=[
-                                       Starred(
-                                          value=Name(id='args', ctx=Load()),
-                                          ctx=Load())],
-                                    ctx=Load()),
-                                 ctx=Store())],
-                           value=Attribute(
-                              value=Name(id='EB', ctx=Load()),
-                              attr='TRUE',
-                              ctx=Load()))],
-                     orelse=[]),
-                  If(
-                     test=Compare(
-                        left=Call(
-                           func=Name(id='len', ctx=Load()),
+                              Name(id='changes', ctx=Load()),
+                              Dict(
+                                 keys=[
+                                    Attribute(
+                                       value=Name(id='change', ctx=Load()),
+                                       attr='name',
+                                       ctx=Load())],
+                                 values=[
+                                    Name(id='change', ctx=Load())])],
+                           keywords=[])),
+                     Expr(
+                        value=Call(
+                           func=Name(id='print', ctx=Load()),
                            args=[
-                              Attribute(
-                                 value=Name(id='change', ctx=Load()),
-                                 attr='false_slicing',
-                                 ctx=Load())],
-                           keywords=[]),
-                        ops=[
-                           Gt()],
-                        comparators=[
-                           Constant(value=0)]),
-                     body=[
-                        Assign(
-                           targets=[
-                              Name(id='current_array', ctx=Store())],
-                           value=Subscript(
-                              value=Name(id='predicate_dict', ctx=Load()),
-                              slice=Attribute(
-                                 value=Name(id='change', ctx=Load()),
-                                 attr='name',
-                                 ctx=Load()),
-                              ctx=Load())),
-                        Assign(
-                           targets=[
-                              Name(id='args', ctx=Store())],
-                           value=Subscript(
-                              value=Attribute(
-                                 value=Name(id='change', ctx=Load()),
-                                 attr='false_slicing',
-                                 ctx=Load()),
-                              slice=Constant(value=0),
-                              ctx=Load())),
-                        Expr(
-                           value=Call(
-                              func=Name(id='print', ctx=Load()),
-                              args=[
-                                 BinOp(
-                                    left=BinOp(
-                                       left=Constant(value='Changed argument: '),
-                                       op=Add(),
-                                       right=Call(
-                                          func=Name(id='str', ctx=Load()),
-                                          args=[
-                                             Name(id='args', ctx=Load())],
-                                          keywords=[])),
-                                    op=Add(),
-                                    right=Constant(value=' to false'))],
-                              keywords=[])),
-                        Assign(
-                           targets=[
-                              Subscript(
-                                 value=Attribute(
-                                    value=Name(id='current_array', ctx=Load()),
-                                    attr='loc',
-                                    ctx=Load()),
-                                 slice=Tuple(
-                                    elts=[
-                                       Starred(
-                                          value=Name(id='args', ctx=Load()),
-                                          ctx=Load())],
-                                    ctx=Load()),
-                                 ctx=Store())],
-                           value=Attribute(
-                              value=Name(id='EB', ctx=Load()),
-                              attr='FALSE',
-                              ctx=Load()))],
-                     orelse=[]),
-                  Assign(
-                     targets=[
-                        Name(id='start', ctx=Store())],
-                     value=Call(
-                        func=Attribute(
-                           value=Name(id='time', ctx=Load()),
-                           attr='time',
-                           ctx=Load()),
-                        args=[],
-                        keywords=[])),
-                  Expr(
-                     value=Call(
-                        func=Name(id='propagate_full', ctx=Load()),
-                        args=[
-                           Dict(
-                              keys=[
-                                 Attribute(
+                              BinOp(
+                                 left=Constant(value='Changed predicate: '),
+                                 op=Add(),
+                                 right=Attribute(
                                     value=Name(id='change', ctx=Load()),
                                     attr='name',
-                                    ctx=Load())],
-                              values=[
-                                 Name(id='change', ctx=Load())])],
-                        keywords=[])),
-                  Assign(
-                     targets=[
-                        Name(id='end', ctx=Store())],
-                     value=Call(
-                        func=Attribute(
-                           value=Name(id='time', ctx=Load()),
-                           attr='time',
-                           ctx=Load()),
-                        args=[],
-                        keywords=[])),
-                  For(
-                     target=Name(id='var_name', ctx=Store()),
-                     iter=Call(
-                        func=Attribute(
-                           value=Name(id='predicate_dict', ctx=Load()),
-                           attr='keys',
-                           ctx=Load()),
-                        args=[],
-                        keywords=[]),
-                     body=[
-                        If(
-                           test=UnaryOp(
-                              op=Not(),
-                              operand=Call(
-                                 func=Attribute(
-                                    value=Name(id='var_name', ctx=Load()),
-                                    attr='startswith',
-                                    ctx=Load()),
-                                 args=[
-                                    Constant(value='_')],
-                                 keywords=[])),
-                           body=[
-                              Expr(
-                                 value=Call(
-                                    func=Name(id='print', ctx=Load()),
-                                    args=[
-                                       Constant(value='__________________________')],
-                                    keywords=[])),
-                              Assign(
-                                 targets=[
-                                    Name(id='grounded_var', ctx=Store())],
-                                 value=Call(
-                                    func=Name(id='get_grounded_atoms_for_display', ctx=Load()),
-                                    args=[
-                                       Name(id='var_name', ctx=Load())],
-                                    keywords=[])),
-                              For(
-                                 target=Tuple(
-                                    elts=[
-                                       Name(id='key', ctx=Store()),
-                                       Name(id='val', ctx=Store())],
-                                    ctx=Store()),
-                                 iter=Call(
-                                    func=Attribute(
-                                       value=Name(id='grounded_var', ctx=Load()),
-                                       attr='items',
-                                       ctx=Load()),
-                                    args=[],
-                                    keywords=[]),
-                                 body=[
-                                    Expr(
-                                       value=Call(
-                                          func=Name(id='print', ctx=Load()),
-                                          args=[
-                                             BinOp(
-                                                left=BinOp(
-                                                   left=Name(id='key', ctx=Load()),
-                                                   op=Add(),
-                                                   right=Constant(value=': ')),
-                                                op=Add(),
-                                                right=Call(
-                                                   func=Name(id='str', ctx=Load()),
-                                                   args=[
-                                                      Name(id='val', ctx=Load())],
-                                                   keywords=[]))],
-                                          keywords=[]))],
-                                 orelse=[]),
-                              Expr(
-                                 value=Call(
-                                    func=Name(id='print', ctx=Load()),
-                                    args=[
-                                       Constant(value='__________________________')],
-                                    keywords=[]))],
-                           orelse=[])],
-                     orelse=[]),
-                  Expr(
-                     value=Call(
-                        func=Name(id='print', ctx=Load()),
-                        args=[
-                           Constant(value='Time to propagate: '),
-                           BinOp(
-                              left=Name(id='end', ctx=Load()),
-                              op=Sub(),
-                              right=Name(id='start', ctx=Load()))],
-                        keywords=[]))],
-               orelse=[]),
-            Expr(
-               value=Call(
-                  func=Name(id='print', ctx=Load()),
-                  args=[],
-                  keywords=[])),
-            Expr(
-               value=Call(
-                  func=Name(id='print', ctx=Load()),
-                  args=[
-                     BinOp(
-                        left=BinOp(
-                           left=Constant(value='Propagation finished using '),
-                           op=Add(),
-                           right=Call(
-                              func=Name(id='str', ctx=Load()),
+                                    ctx=Load()))],
+                           keywords=[])),
+                     If(
+                        test=Compare(
+                           left=Call(
+                              func=Name(id='len', ctx=Load()),
                               args=[
-                                 Name(id='count', ctx=Load())],
-                              keywords=[])),
+                                 Attribute(
+                                    value=Name(id='change', ctx=Load()),
+                                    attr='true_slicing',
+                                    ctx=Load())],
+                              keywords=[]),
+                           ops=[
+                              Gt()],
+                           comparators=[
+                              Constant(value=0)]),
+                        body=[
+                           Assign(
+                              targets=[
+                                 Name(id='current_array', ctx=Store())],
+                              value=Subscript(
+                                 value=Name(id='predicate_dict', ctx=Load()),
+                                 slice=Attribute(
+                                    value=Name(id='change', ctx=Load()),
+                                    attr='name',
+                                    ctx=Load()),
+                                 ctx=Load())),
+                           Assign(
+                              targets=[
+                                 Name(id='args', ctx=Store())],
+                              value=Subscript(
+                                 value=Attribute(
+                                    value=Name(id='change', ctx=Load()),
+                                    attr='true_slicing',
+                                    ctx=Load()),
+                                 slice=Constant(value=0),
+                                 ctx=Load())),
+                           Expr(
+                              value=Call(
+                                 func=Name(id='print', ctx=Load()),
+                                 args=[
+                                    BinOp(
+                                       left=BinOp(
+                                          left=Constant(value='Changed argument: '),
+                                          op=Add(),
+                                          right=Call(
+                                             func=Name(id='str', ctx=Load()),
+                                             args=[
+                                                Name(id='args', ctx=Load())],
+                                             keywords=[])),
+                                       op=Add(),
+                                       right=Constant(value=' to true'))],
+                                 keywords=[])),
+                           Assign(
+                              targets=[
+                                 Subscript(
+                                    value=Attribute(
+                                       value=Name(id='current_array', ctx=Load()),
+                                       attr='loc',
+                                       ctx=Load()),
+                                    slice=Tuple(
+                                       elts=[
+                                          Starred(
+                                             value=Name(id='args', ctx=Load()),
+                                             ctx=Load())],
+                                       ctx=Load()),
+                                    ctx=Store())],
+                              value=Attribute(
+                                 value=Name(id='EB', ctx=Load()),
+                                 attr='TRUE',
+                                 ctx=Load()))],
+                        orelse=[]),
+                     If(
+                        test=Compare(
+                           left=Call(
+                              func=Name(id='len', ctx=Load()),
+                              args=[
+                                 Attribute(
+                                    value=Name(id='change', ctx=Load()),
+                                    attr='false_slicing',
+                                    ctx=Load())],
+                              keywords=[]),
+                           ops=[
+                              Gt()],
+                           comparators=[
+                              Constant(value=0)]),
+                        body=[
+                           Assign(
+                              targets=[
+                                 Name(id='current_array', ctx=Store())],
+                              value=Subscript(
+                                 value=Name(id='predicate_dict', ctx=Load()),
+                                 slice=Attribute(
+                                    value=Name(id='change', ctx=Load()),
+                                    attr='name',
+                                    ctx=Load()),
+                                 ctx=Load())),
+                           Assign(
+                              targets=[
+                                 Name(id='args', ctx=Store())],
+                              value=Subscript(
+                                 value=Attribute(
+                                    value=Name(id='change', ctx=Load()),
+                                    attr='false_slicing',
+                                    ctx=Load()),
+                                 slice=Constant(value=0),
+                                 ctx=Load())),
+                           Expr(
+                              value=Call(
+                                 func=Name(id='print', ctx=Load()),
+                                 args=[
+                                    BinOp(
+                                       left=BinOp(
+                                          left=Constant(value='Changed argument: '),
+                                          op=Add(),
+                                          right=Call(
+                                             func=Name(id='str', ctx=Load()),
+                                             args=[
+                                                Name(id='args', ctx=Load())],
+                                             keywords=[])),
+                                       op=Add(),
+                                       right=Constant(value=' to false'))],
+                                 keywords=[])),
+                           Assign(
+                              targets=[
+                                 Subscript(
+                                    value=Attribute(
+                                       value=Name(id='current_array', ctx=Load()),
+                                       attr='loc',
+                                       ctx=Load()),
+                                    slice=Tuple(
+                                       elts=[
+                                          Starred(
+                                             value=Name(id='args', ctx=Load()),
+                                             ctx=Load())],
+                                       ctx=Load()),
+                                    ctx=Store())],
+                              value=Attribute(
+                                 value=Name(id='EB', ctx=Load()),
+                                 attr='FALSE',
+                                 ctx=Load()))],
+                        orelse=[]),
+                     Assign(
+                        targets=[
+                           Name(id='start', ctx=Store())],
+                        value=Call(
+                           func=Attribute(
+                              value=Name(id='time', ctx=Load()),
+                              attr='time',
+                              ctx=Load()),
+                           args=[],
+                           keywords=[])),
+                     Expr(
+                        value=Call(
+                           func=Name(id='propagate_full', ctx=Load()),
+                           args=[
+                              Name(id='changes', ctx=Load())],
+                           keywords=[])),
+                     Assign(
+                        targets=[
+                           Name(id='end', ctx=Store())],
+                        value=Call(
+                           func=Attribute(
+                              value=Name(id='time', ctx=Load()),
+                              attr='time',
+                              ctx=Load()),
+                           args=[],
+                           keywords=[])),
+                     AugAssign(
+                        target=Name(id='total_time', ctx=Store()),
                         op=Add(),
-                        right=Constant(value=' random assignment(s).'))],
-                  keywords=[]))],
-         decorator_list=[]),
-      Expr(
-         value=Call(
-            func=Name(id='test_on_random_input', ctx=Load()),
-            args=[],
-            keywords=[]))],
-   type_ignores=[])
-
-
+                        value=BinOp(
+                           left=Name(id='end', ctx=Load()),
+                           op=Sub(),
+                           right=Name(id='start', ctx=Load()))),
+                     For(
+                        target=Name(id='var_name', ctx=Store()),
+                        iter=Call(
+                           func=Attribute(
+                              value=Name(id='predicate_dict', ctx=Load()),
+                              attr='keys',
+                              ctx=Load()),
+                           args=[],
+                           keywords=[]),
+                        body=[
+                           If(
+                              test=UnaryOp(
+                                 op=Not(),
+                                 operand=Call(
+                                    func=Attribute(
+                                       value=Name(id='var_name', ctx=Load()),
+                                       attr='startswith',
+                                       ctx=Load()),
+                                    args=[
+                                       Constant(value='_')],
+                                    keywords=[])),
+                              body=[
+                                 Expr(
+                                    value=Call(
+                                       func=Name(id='print', ctx=Load()),
+                                       args=[
+                                          Constant(value='__________________________')],
+                                       keywords=[])),
+                                 Assign(
+                                    targets=[
+                                       Name(id='grounded_var', ctx=Store())],
+                                    value=Call(
+                                       func=Name(id='get_grounded_atoms_for_display', ctx=Load()),
+                                       args=[
+                                          Name(id='var_name', ctx=Load())],
+                                       keywords=[])),
+                                 For(
+                                    target=Tuple(
+                                       elts=[
+                                          Name(id='key', ctx=Store()),
+                                          Name(id='val', ctx=Store())],
+                                       ctx=Store()),
+                                    iter=Call(
+                                       func=Attribute(
+                                          value=Name(id='grounded_var', ctx=Load()),
+                                          attr='items',
+                                          ctx=Load()),
+                                       args=[],
+                                       keywords=[]),
+                                    body=[
+                                       Expr(
+                                          value=Call(
+                                             func=Name(id='print', ctx=Load()),
+                                             args=[
+                                                BinOp(
+                                                   left=BinOp(
+                                                      left=Name(id='key', ctx=Load()),
+                                                      op=Add(),
+                                                      right=Constant(value=': ')),
+                                                   op=Add(),
+                                                   right=Call(
+                                                      func=Name(id='str', ctx=Load()),
+                                                      args=[
+                                                         Name(id='val', ctx=Load())],
+                                                      keywords=[]))],
+                                             keywords=[]))],
+                                    orelse=[]),
+                                 Expr(
+                                    value=Call(
+                                       func=Name(id='print', ctx=Load()),
+                                       args=[
+                                          Constant(value='__________________________')],
+                                       keywords=[]))],
+                              orelse=[])],
+                        orelse=[]),
+                     Expr(
+                        value=Call(
+                           func=Name(id='print', ctx=Load()),
+                           args=[
+                              Constant(value='Time to propagate: '),
+                              BinOp(
+                                 left=Name(id='end', ctx=Load()),
+                                 op=Sub(),
+                                 right=Name(id='start', ctx=Load()))],
+                           keywords=[]))],
+                  orelse=[]),
+               Expr(
+                  value=Call(
+                     func=Name(id='print', ctx=Load()),
+                     args=[],
+                     keywords=[])),
+               Expr(
+                  value=Call(
+                     func=Name(id='print', ctx=Load()),
+                     args=[
+                        BinOp(
+                           left=BinOp(
+                              left=Constant(value='Propagation finished using '),
+                              op=Add(),
+                              right=Call(
+                                 func=Name(id='str', ctx=Load()),
+                                 args=[
+                                    Name(id='count', ctx=Load())],
+                                 keywords=[])),
+                           op=Add(),
+                           right=Constant(value=' random assignment(s).'))],
+                     keywords=[])),
+               Expr(
+                  value=Call(
+                     func=Name(id='print', ctx=Load()),
+                     args=[
+                        Constant(value='Initial propagation: '),
+                        Name(id='init_time', ctx=Load())],
+                     keywords=[])),
+               Expr(
+                  value=Call(
+                     func=Name(id='print', ctx=Load()),
+                     args=[
+                        Constant(value='Total propagation time (including initial propagation): '),
+                        Name(id='total_time', ctx=Load())],
+                     keywords=[])),
+               Expr(
+                  value=Call(
+                     func=Name(id='print', ctx=Load()),
+                     args=[],
+                     keywords=[]))],
+            decorator_list=[]),
+         Expr(
+            value=Call(
+               func=Name(id='test_on_random_input', ctx=Load()),
+               args=[],
+               keywords=[]))],
+      type_ignores=[])
 
 
 # AST of an auxiliary function
